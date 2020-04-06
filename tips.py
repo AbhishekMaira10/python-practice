@@ -162,6 +162,9 @@ print(a[::-1])
 words = ('Hello', 'python', 'programmers')
 print('!'.join(words))
 
+l  = ['1','2','3','5']
+print(','.join(l))
+
 # most frequent element in the list
 winnings = ['John', 'Billy', 'Sam', 'Billy', 'John', 'John']
 print(max(set(winnings), key=winnings.count))

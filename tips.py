@@ -5,6 +5,7 @@
 from sympy import Symbol, diff
 import datetime
 import time
+
 NOW = datetime.datetime.now()
 print(f"{NOW:%y-%m-%d %H:%m}")
 
@@ -24,9 +25,9 @@ name = "Eric"
 age = 74
 print(f"Hello, {name}. You are {age}.")
 
-#pylint: disable = too-few-public-methods
+# pylint: disable = too-few-public-methods
 
-#str and repr
+# str and repr
 
 
 class Comedian:
@@ -50,21 +51,21 @@ print(f"{new_comedian}")
 # underscore placeholders
 num1 = 10_000_000_000
 num2 = 100_000_000
-total = num1+num2
+total = num1 + num2
 print(f"{total:,}")
 
 # enumerate
-names = ['Corey', 'Abhi', 'Magnus', 'Messi', 'Matthew']
+names = ["Corey", "Abhi", "Magnus", "Messi", "Matthew"]
 for i, name in enumerate(names, start=1):
     print(i, name)
 
 # Zip
-names = ['Peter Parker', 'Clark Kent', 'Wade wilson', 'Bruce Wayne']
-heroes = ['Spiderman', 'Superman', 'Deadpool', 'Batman']
-universes = ['Marvel', 'DC', 'Marvel', 'DC']
+names = ["Peter Parker", "Clark Kent", "Wade wilson", "Bruce Wayne"]
+heroes = ["Spiderman", "Superman", "Deadpool", "Batman"]
+universes = ["Marvel", "DC", "Marvel", "DC"]
 
 for name, hero, universe in zip(names, heroes, universes):
-    print(f'{name} is actually {hero} from {universe}')
+    print(f"{name} is actually {hero} from {universe}")
 
 # unpacking
 a, b, *c = (1, 2, 3, 4, 5)
@@ -104,20 +105,20 @@ def dispatch_dict(operator, x, y):
         x {Int} -- first input
         y {Int} -- second input
     """
-    return{
-        'add': lambda: x + y,
-        'sub': lambda: x - y,
-        'mul': lambda: x * y,
-        'div': lambda: x / y
+    return {
+        "add": lambda: x + y,
+        "sub": lambda: x - y,
+        "mul": lambda: x * y,
+        "div": lambda: x / y,
     }.get(operator, lambda: None)()
 
 
-operator, x, y = 'mul', 8, 16
+operator, x, y = "mul", 8, 16
 print(dispatch_dict(operator, x, y))
 
-#derivatives in python
-x = Symbol('x')
-derivative = diff(x**2, x)
+# derivatives in python
+x = Symbol("x")
+derivative = diff(x ** 2, x)
 value = 20  # YOUR VALUE HERE
 d = derivative.subs({x: value})
 print(d)
@@ -140,8 +141,8 @@ def outer_func(msg):
     return inner_func
 
 
-hi_func = outer_func('hi')
-hello_func = outer_func('hello')
+hi_func = outer_func("hi")
+hello_func = outer_func("hello")
 
 print(hi_func)
 
@@ -153,20 +154,20 @@ print(a[::-1])
 
 # walrus operator- works only in python 3.8+
 
-#a = ['j', 'a', 'k', 'd', 'c']
+# a = ['j', 'a', 'k', 'd', 'c']
 # if((n := len*(a))%2 == 1):
 #    print(f"The number of letters is {n}, which is odd")
 
 # using the joins() function
 
-words = ('Hello', 'python', 'programmers')
-print('!'.join(words))
+words = ("Hello", "python", "programmers")
+print("!".join(words))
 
-l  = ['1','2','3','5']
-print(','.join(l))
+l = ["1", "2", "3", "5"]
+print(",".join(l))
 
 # most frequent element in the list
-winnings = ['John', 'Billy', 'Sam', 'Billy', 'John', 'John']
+winnings = ["John", "Billy", "Sam", "Billy", "John", "John"]
 print(max(set(winnings), key=winnings.count))
 
 # track the frequencies of elements in a list
@@ -176,10 +177,50 @@ print(tracked)
 print(sorted(tracked.items(), key=lambda x: x[1], reverse=True))
 
 # using the any and all function
-arrival_hours = {'Mon': 8.5, 'Tue': 8.75, 'wed': 9, 'Thu': 8.5, 'Fri': 8.5}
+arrival_hours = {"Mon": 8.5, "Tue": 8.75, "wed": 9, "Thu": 8.5, "Fri": 8.5}
 arrival_checks = [x > 8.75 for x in arrival_hours.values()]
 print(any(arrival_checks))
 
 arrival_checks_all = [x > 9.5 for x in arrival_hours.values()]
 print(all(arrival_checks))
 
+# custom reduce function
+
+
+def my_reduce(function, iterable):
+    it = iter(iterable)
+    result = 0
+
+    for x in it:
+        result = function(result, x)
+    return result
+
+
+l = [1, 2, 3, 4, 5]
+result = my_reduce(lambda x, y: x + y, l)
+
+print(result)
+
+# custom filter function
+
+
+def filtered_vowel(alphabet):
+    vowels = ["a", "e", "i", "o", "u"]
+    return True if alphabet.lower() in vowels else False
+
+
+def my_filter(function, iterable):
+    it = iter(iterable)
+    result = [x for x in it if function(x)]
+    return result
+
+
+alphabets = ["a", "b", "h", "i", "s", "h", "e", "k"]
+result = my_filter(filtered_vowel, alphabets)
+
+print(result)
+
+#map with if statemennt can be done with filter function
+arr_list = [-1, -2, -3, 1, 2, 3, 5]
+result = list(map(lambda x: x**2, filter(lambda x: x > 0, arr_list)))
+print(result)

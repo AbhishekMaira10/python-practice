@@ -13,3 +13,7 @@ dict = OrderedDict({i['name']:i['price'] for i in fruits})
 dict2 = {i for i in dict.items()}
 list = [i for i in dict.values()]
 print(dict,dict2,list)
+
+words = ['abhishek', 'aditya', 'abhinav', 'adarsh']
+wordlength = {str(i): len(i) for i in words}
+print(wordlength.items())

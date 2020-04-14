@@ -2,6 +2,7 @@
      PEP8 style of writing cleaner code.
 """
 # datetime
+import secrets
 from sympy import Symbol, diff
 import datetime
 import time
@@ -220,7 +221,12 @@ result = my_filter(filtered_vowel, alphabets)
 
 print(result)
 
-#map with if statemennt can be done with filter function
+# map with if statemennt can be done with filter function
 arr_list = [-1, -2, -3, 1, 2, 3, 5]
 result = list(map(lambda x: x**2, filter(lambda x: x > 0, arr_list)))
 print(result)
+
+# to create a secret key(a big random set of characters)
+#import secrets
+secret_key = secrets.token_hex(16)
+print(secret_key)

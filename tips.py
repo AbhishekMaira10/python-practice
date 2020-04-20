@@ -230,3 +230,14 @@ print(result)
 #import secrets
 secret_key = secrets.token_hex(16)
 print(secret_key)
+
+#finding min and max index
+numbers = [32, 12, 4, 122, 123]
+
+#simple way
+index_min = numbers.index(min(numbers))
+index_max = numbers.index(max(numbers))
+
+#using lambdas
+index_min2 =  min(enumerate(numbers), key=lambda x: x[1])[0]
+index_max2 =  max(enumerate(numbers), key=lambda x: x[1])[0]

@@ -265,3 +265,42 @@ li5.append([4])
 li5[0][0] = ['X']
 print(li6)
 
+#binary of an integer
+print(bin(5))
+
+#removing whitespaces from a string
+s = 'A string with     white space'
+''.join(s.split())
+
+#diference between instance, static and class methods in python
+class CoffeeShop:
+    specialty = 'espresso'
+
+    def __init__(self, coffee_price):
+        self.coffee_price = coffee_price
+    
+    # instance method
+    #accept self parameter and relate to a specific instance of the class.
+    def make_coffee(self):
+        print(f'Making {self.specialty} for ${self.coffee_price}')
+    
+    # static method
+    # use @staticmethod decorator, are not related to a specific instance,
+    # and are self-contained (don’t modify class or instance properties)    
+    @staticmethod
+    def check_weather():
+        print('Its sunny')
+
+    # class method
+    # accept cls parameter and can modify the class itself
+    @classmethod
+    def change_specialty(cls, specialty):
+        cls.specialty = specialty
+        print(f'Specialty changed to {specialty}')
+
+
+coffee_shop = CoffeeShop('5')
+coffee_shop.make_coffee()
+coffee_shop.check_weather()
+coffee_shop.change_specialty('drip coffee')
+

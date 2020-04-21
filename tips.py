@@ -241,3 +241,27 @@ index_max = numbers.index(max(numbers))
 #using lambdas
 index_min2 =  min(enumerate(numbers), key=lambda x: x[1])[0]
 index_max2 =  max(enumerate(numbers), key=lambda x: x[1])[0]
+
+
+#difference between shallow copy and deep copy
+
+# by creating a shallow copy adding a new object 
+# to the original collection, li3, doesn’t propagate to li4,
+# but modifying one of the objects in li3 will propagate to li4. 
+li3 = [['a'],['b'],['c']]
+li4 = list(li3)
+li3.append([4])
+print(li4)
+
+li3[0][0] = ['X']
+print(li4)
+
+# by creating a deep copy The 2 objects are now completely
+# independent and changes to either have no affect on the other.
+import copy
+li5 = [['a'],['b'],['c']]
+li6 = copy.deepcopy(li5)
+li5.append([4])
+li5[0][0] = ['X']
+print(li6)
+

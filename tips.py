@@ -2,6 +2,7 @@
      PEP8 style of writing cleaner code.
 """
 # datetime
+import copy
 import secrets
 from sympy import Symbol, diff
 import datetime
@@ -148,11 +149,6 @@ hello_func = outer_func("hello")
 print(hi_func)
 
 
-# reversing a sequence
-
-a = (1, 2, 3, 4, 5)
-print(a[::-1])
-
 # walrus operator- works only in python 3.8+
 
 # a = ['j', 'a', 'k', 'd', 'c']
@@ -231,62 +227,64 @@ print(result)
 secret_key = secrets.token_hex(16)
 print(secret_key)
 
-#finding min and max index
+# finding min and max index
 numbers = [32, 12, 4, 122, 123]
 
-#simple way
+# simple way
 index_min = numbers.index(min(numbers))
 index_max = numbers.index(max(numbers))
 
-#using lambdas
-index_min2 =  min(enumerate(numbers), key=lambda x: x[1])[0]
-index_max2 =  max(enumerate(numbers), key=lambda x: x[1])[0]
+# using lambdas
+index_min2 = min(enumerate(numbers), key=lambda x: x[1])[0]
+index_max2 = max(enumerate(numbers), key=lambda x: x[1])[0]
 
 
-#difference between shallow copy and deep copy
+# difference between shallow copy and deep copy
 
-# by creating a shallow copy adding a new object 
+# by creating a shallow copy adding a new object
 # to the original collection, li3, doesn’t propagate to li4,
-# but modifying one of the objects in li3 will propagate to li4. 
-li3 = [['a'],['b'],['c']]
+# but modifying one of the objects in li3 will propagate to li4.
+li3 = [['a'], ['b'], ['c']]
 li4 = list(li3)
 li3.append([4])
 print(li4)
+print(li3)
 
 li3[0][0] = ['X']
-print(li4)
+# print(li4)
 
 # by creating a deep copy The 2 objects are now completely
 # independent and changes to either have no affect on the other.
-import copy
-li5 = [['a'],['b'],['c']]
+li5 = [['a'], ['b'], ['c']]
 li6 = copy.deepcopy(li5)
 li5.append([4])
 li5[0][0] = ['X']
 print(li6)
 
-#binary of an integer
+# binary of an integer
 print(bin(5))
 
-#removing whitespaces from a string
+# removing whitespaces from a string
 s = 'A string with     white space'
-''.join(s.split())
+print(''.join(s.split()))
 
-#diference between instance, static and class methods in python
+# diference between instance, static and class methods in python
+
+
 class CoffeeShop:
     specialty = 'espresso'
 
     def __init__(self, coffee_price):
         self.coffee_price = coffee_price
-    
+
     # instance method
-    #accept self parameter and relate to a specific instance of the class.
+    # accept self parameter and relate to a specific instance of the class.
     def make_coffee(self):
         print(f'Making {self.specialty} for ${self.coffee_price}')
-    
+
     # static method
     # use @staticmethod decorator, are not related to a specific instance,
-    # and are self-contained (don’t modify class or instance properties)    
+    # and are self-contained (don’t modify class or instance properties)
     @staticmethod
     def check_weather():
         print('Its sunny')
@@ -304,3 +302,50 @@ coffee_shop.make_coffee()
 coffee_shop.check_weather()
 coffee_shop.change_specialty('drip coffee')
 
+
+# Reversing a list in python
+
+# Method 1: Using the reversed() built-in function.
+
+# In this method, we neither reverse a list in-place(modify the original list),
+# nor we create any copy of the list. Instead, we get a reverse iterator which we
+# use to cycle through the list.
+
+def Reverse(lst):
+    return [ele for ele in reversed(lst)]
+
+
+# Driver Code
+lst = [10, 11, 12, 13, 14, 15]
+print(Reverse(lst))
+
+# Method 2: Using the reverse() built-in function.
+
+# Using the reverse() method we can reverse the contents of the list object
+# in-place i.e., we don’t need to create a new list instead we just copy the
+# existing elements to the original list in reverse order. This method directly
+# modifies the original list.
+
+
+def Reverse2(lst):
+    lst.reverse()
+    return lst
+
+
+lst = [10, 11, 12, 13, 14, 15]
+print(Reverse2(lst))
+
+# Method 3: Using the slicing technique.
+
+# In this technique, a copy of the list is made and the list is not sorted
+# in-place. Creating a copy requires more space to hold all of the existing
+# elements. This exhausts more memory.filter_none
+
+
+def Reverse3(lst):
+    new_lst = lst[::-1]
+    return new_lst
+
+
+lst = [10, 11, 12, 13, 14, 15]
+print(Reverse3(lst))

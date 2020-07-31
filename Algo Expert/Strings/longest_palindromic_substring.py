@@ -11,4 +11,4 @@ def longestPalindromicSubstring(string):
     return output
 
 
-print(longestPalindromicSubstring("a"))
+print(longestPalindromicSubstring("abaxyzzyxf"))
